@@ -9,6 +9,8 @@ company = st.selectbox('Brand/Nama HP', df['Nama HP'].unique())
 
 prosesor = st.selectbox('Processor', df['Upd_Processor'].unique())
 
+rating = st.selectbox('Rating', [1, 2, 3, 4, 5])
+
 ram = st.selectbox('RAM/GB',[2,4,8,12])
 
 rom = st.selectbox('ROM/GB',[4,8,16,32,64,128,512])
@@ -26,6 +28,6 @@ total_front_cam = st.selectbox('Total Kamera Depan',[1,2])
 
 
 if st.button('Predict Price'):
-    query = np.array([company,prosesor,ram,rom,baterai,size_back_cam,total_back_cam,size_front_cam,total_front_cam], dtype=object)
-    query = query.reshape(1,9)
-    st.title("predicted in Indian Rupee : ₹ " + str(int(np.exp(pipe.predict(query)[0]))))
+    query = np.array([company,rating,ram,rom,baterai,size_back_cam,total_back_cam,size_front_cam,total_front_cam,prosesor], dtype=object)
+    query = query.reshape(1,10)
+    st.title("predicted in IDR : Rp " + str(int(np.exp(pipe.predict(query)[0]))))
